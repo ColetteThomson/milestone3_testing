@@ -119,6 +119,29 @@ def calculate_surplus_data(sales_row):
     """ print to test  print(surplus_data)"""
     return surplus_data
 
+def get_last_5_entries_sales():
+    """
+    collects columns of data from sales worksheet, collecting
+    the last 5 entries for each sandwich and returns the data as a list of lists
+    Note: need to use 'col_values()' method by gspread to call columns.
+    Note: numbers we give gspread methods start at 1 (not 0)
+    """
+    sales = SHEET.worksheet("sales")
+    """column = sales.col_values(3)
+    print(column)"""
+    columns = []
+    """use a for loop to get all columns as lists nested in a list.
+    Note: parameters for range - needed to cater for gspread methods starting at 1 (not 0)
+    """
+    for ind in range(1, 7):
+        #print(ind) ...to check
+        column = sales.col_values(ind)
+        columns.append(column[-5:])
+    #above will return all columns. Note: use 'slice' to return last 5, add [-5:] to above 'append'
+    #with ':' to slice multiple values
+    # pprint(columns) .... to check for statment
+    return columns
+
 def main():
     """need to wrap all program functions within one function main() Note: function can only
     be 'called' after it is 'defined' """
@@ -138,4 +161,6 @@ def main():
 
 """welcome statement will display before using input prompt """
 print('Welcome to Love Sandwiches Data Automation')
-main()
+"""main()"""
+
+sales_columns = get_last_5_entries_sales()
