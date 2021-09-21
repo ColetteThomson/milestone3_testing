@@ -142,6 +142,23 @@ def get_last_5_entries_sales():
     # pprint(columns) .... to check for statment
     return columns
 
+def calculate_stock_data(data):
+    """calculate the average stock for each item type, adding 10% """
+    print('Calculating stock data...\n')
+    """use for loop to calculate average from each list in our data.
+    Note: use 'len' if amount of columns unknown or could vary, otherwise would be '/5'
+    where '5' is no of set columns.  Note: use 'round' to get whole numbers from floating points """
+    new_stock_data = []
+    for column in data:
+        int_column = [int(num) for num in column]
+        average = sum(int_column) / len(int_column)
+        #to add 10% to average
+        stock_num = average * 1.1
+        new_stock_data.append(round(stock_num))
+    #print(new_stock_data)  ...to check
+    return new_stock_data
+
+
 def main():
     """need to wrap all program functions within one function main() Note: function can only
     be 'called' after it is 'defined' """
@@ -158,9 +175,13 @@ def main():
     """ to test...  print(new_surplus_data)
     update_surplus_worksheet(new_surplus_data)"""
     update_worksheet(new_surplus_data, "surplus")
+    sales_columns = get_last_5_entries_sales()
+    stock_data = calculate_stock_data(sales_columns)
+    #print(stock_data) .. to check
+    update_worksheet(stock_data, "stock")
 
 """welcome statement will display before using input prompt """
 print('Welcome to Love Sandwiches Data Automation')
-"""main()"""
+main()
 
-sales_columns = get_last_5_entries_sales()
+
