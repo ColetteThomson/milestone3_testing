@@ -86,6 +86,18 @@ def update_surplus_worksheet(data):
     surplus_worksheet.append_row(data)
     print('Surplus worksheet updated successfully.\n')
 
+"""refactoring code: i.e. combining above two update sales and surplus worksheets"""
+def update_worksheet(data, worksheet):
+    """
+    receives a list of integerw to be inseeted into a worksheet.
+    update the relevant worksheet with the data provided
+    """
+    print(f'updating {worksheet}...\n')
+    worksheet_to_update = SHEET.worksheet(worksheet)
+    worksheet_to_update.append_row(data)
+    print(f'{worksheet} worksheet updated successfully\n')
+
+
 def calculate_surplus_data(sales_row):
     """
     compare sales with stock and calculate the surplus for each item type.
@@ -125,10 +137,11 @@ def main():
     print(data)"""
     sales_data = [int(num) for num in data]
     """need to call u-s-wksht... """
-    update_sales_worksheet(sales_data)
+    update_worksheet(sales_data, "sales")
     new_surplus_data = calculate_surplus_data(sales_data)
-    """ to test...  print(new_surplus_data)"""
-    update_surplus_worksheet(new_surplus_data)
+    """ to test...  print(new_surplus_data)
+    update_surplus_worksheet(new_surplus_data)"""
+    update_worksheet(new_surplus_data, "surplus")
 
 """welcome statement will display before using input prompt """
 print('Welcome to Love Sandwiches Data Automation')
