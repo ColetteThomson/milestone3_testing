@@ -1,6 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
-from pprint import pprint
+#from pprint import pprint
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -28,7 +28,8 @@ def get_sales_data():
         print('Data should be six numbers, separated by commas.')
         print('Example: 10, 20, 30, 40, 50, 60\n')
 
-        data_str = input('Enter your data here: ')
+        #for deployment in heroku - always add a '\n' at end of 'input' field
+        data_str = input('Enter your data here: \n')
         """ to check this is working...
         print(f"The data provided is {data_str}")
         """
@@ -185,3 +186,8 @@ print('Welcome to Love Sandwiches Data Automation')
 main()
 
 
+#NB: for Heroku deployment, after saving run.py:
+#- add '\n' at end of 'input' field
+#- remove any 'pprint' imports and uses in run.py
+#- type: pip3 freeze > requirements.txt ... then enter.  
+# This .txt file will be updated with all the 'imports' initially loaded in the run.py file
