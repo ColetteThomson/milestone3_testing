@@ -93,7 +93,17 @@ def calculate_surplus_data(sales_row):
 
     """need to get only last line of stock list, so use slice method i.e. [-1]. can also use .len() method """
     stock_row = stock[-1]
-    print(stock_row)
+    """to print out values of two rows 
+    print(f'stock_row: {stock_row}')
+    print(f'sales row: {sales_row}')"""
+
+    """zip() is used to iterate through 2 separate lists at same time """
+    surplus_data = []
+    for stock, sales in zip(stock_row, sales_row):
+        surplus = int(stock) - sales
+        surplus_data.append(surplus)
+    """ print to test  print(surplus_data)"""
+    return surplus_data
 
 def main():
     """need to wrap all program functions within one function main() Note: function can only
@@ -107,7 +117,8 @@ def main():
     sales_data = [int(num) for num in data]
     """need to call u-s-wksht... """
     update_sales_worksheet(sales_data)
-    calculate_surplus_data(sales_data)
+    new_surplus_data = calculate_surplus_data(sales_data)
+    print(new_surplus_data)
 
 """welcome statement will display before using input prompt """
 print('Welcome to Love Sandwiches Data Automation')
